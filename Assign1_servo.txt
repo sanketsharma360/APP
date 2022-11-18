@@ -1,0 +1,44 @@
+
+---------------------------------------------------------------------------------------------------------
+
+Name : Sanket Godse
+Roll No : 33
+Class : TE-IT
+Subject : IOT (Assignment -1)
+
+----------------------------------------------------------------------------------------------------------
+
+#include <Servo.h>
+Servo servo1;
+int trigPin = 9;
+int echoPin = 8;
+long distance;
+long duration;
+ 
+void setup() 
+{
+servo1.attach(7); 
+ pinMode(trigPin, OUTPUT);
+ pinMode(echoPin, INPUT);
+}
+ 
+void loop() 
+{
+  ultra();
+  servo1.write(0);
+  if(distance <= 10)  // distance from where ultrasonic sensor detects motion
+  {
+  servo1.write(90);    // rotation angle of servo motor 90 degrees
+  }
+}
+ 
+void ultra()
+{
+  digitalWrite(trigPin, LOW); // low to high 
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);  // object detection (ms)
+  distance = duration*0.034/2;    //  0.034 sound wave 
+}
